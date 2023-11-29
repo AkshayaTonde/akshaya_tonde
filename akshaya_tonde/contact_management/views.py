@@ -14,3 +14,8 @@ def home(request):
     return render(request, "index.html", context={'contact_list': contact_list})
 
 
+def createContact(request):
+    return render(request, "createContact.html")
+
+def viewContact (request):
+    return render(request, "viewContact.html")
