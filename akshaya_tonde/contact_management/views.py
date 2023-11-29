@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import * 
+import datetime
 
 
 def home(request):
@@ -17,7 +19,15 @@ def home(request):
 def createContact(request):
 
     data = request.POST 
-    print(data)
+
+    contact_Details.objects.create(
+        name = data.get("name"),
+        email = data.get("email"),
+        notes = data.get("notes"),
+        creation_date = datetime.datetime.now()
+    )
+   
+
     context = {'page': 'Create Contact'}
     return render(request, "createContact.html", context)
 
