@@ -4,4 +4,25 @@
     <div>
         <h1>Create Contact</h1>
     </div>
+    <div class="container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Create a Contact</h2>
+        <div class="mb-1">
+            <label for="exampleFormControlTextarea1" class="form-label">Name </label>
+            <textarea name="name" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="mb-1">
+            <label for="exampleFormControlInput1" class="form-label">Email </label>
+            <input name="email"  type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        </div>
+        <div class="mb-1">
+            <label for="exampleFormControlTextarea1" class="form-label">Notes </label>
+            <textarea name="notes"  class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
+        </div>
+    </n>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="cancel" class="btn btn-danger">Cancel</button>
+    </form>
+    </div>
 {% endblock %}

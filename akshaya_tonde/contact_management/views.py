@@ -11,11 +11,16 @@ def home(request):
 
     ]
 
-    return render(request, "index.html", context={'contact_list': contact_list})
+    return render(request, "index.html", context={'page':'Contact Management','contact_list': contact_list})
 
 
 def createContact(request):
-    return render(request, "createContact.html")
+
+    data = request.POST 
+    print(data)
+    context = {'page': 'Create Contact'}
+    return render(request, "createContact.html", context)
 
 def viewContact (request):
-    return render(request, "viewContact.html")
+    context = {'page': 'View Contact'}
+    return render(request, "viewContact.html", context)
