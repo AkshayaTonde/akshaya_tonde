@@ -6,28 +6,21 @@ import datetime
 
 def home(request):
 
-    contact_list =[
-        {'Contact_name':'Akshaya', 'email':'akshaya@gmail.com','CreatedTime':'021545'},
-        {'Contact_name':'Mahan', 'email':'mohan@test.com','CreatedTime':'021545'},
-        {'Contact_name':'Swapnil', 'email':'swaps@test.com','CreatedTime':'021545'}
-
-    ]
-
-    return render(request, "index.html", context={'page':'Contact Management','contact_list': contact_list})
+    return render(request, "index.html", context={'page':'Contact Management'})
 
 
 def createContact(request):
 
     data = request.POST 
 
-    contact_Details.objects.create(
+    print(data)
+
+    ContactsInfo.objects.create(
         name = data.get("name"),
-        email = data.get("email"),
+        email = data.get("emailadd"),
         notes = data.get("notes"),
         creation_date = datetime.datetime.now()
     )
-   
-
     context = {'page': 'Create Contact'}
     return render(request, "createContact.html", context)
 
