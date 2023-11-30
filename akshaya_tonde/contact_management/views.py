@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import * 
-import datetime
+import django.utils.timezone
 
 
 def home(request):
@@ -11,16 +11,17 @@ def home(request):
 
 def createContact(request):
 
-    data = request.POST 
-
-    print(data)
-
-    ContactsInfo.objects.create(
-        name = data.get("name"),
-        email = data.get("emailadd"),
-        notes = data.get("notes"),
-        creation_date = datetime.datetime.now()
-    )
+    if request.method == "POST":
+        data = request.POST
+        print(data)
+        ContactsInfo.objects.create(
+            name = data.get("name"),
+            email = data.get("emailadd"),
+            notes = data.get("notes"),
+            creation_date = django.utils.timezone.now()
+        )
+        return redirect('/')
+        
     context = {'page': 'Create Contact'}
     return render(request, "createContact.html", context)
 
