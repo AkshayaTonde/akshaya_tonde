@@ -5,8 +5,9 @@ import django.utils.timezone
 
 
 def home(request):
+    queryset = ContactsInfo.objects.all() 
 
-    return render(request, "index.html", context={'page':'Contact Management'})
+    return render(request, "index.html", context={'page':'Contact Management', 'contactsInfo': queryset})
 
 
 def createContact(request):
@@ -20,11 +21,18 @@ def createContact(request):
             notes = data.get("notes"),
             creation_date = django.utils.timezone.now()
         )
-        return redirect('/')
-        
-    context = {'page': 'Create Contact'}
+        return redirect('/viewContact')
+
     return render(request, "createContact.html", context)
 
 def viewContact (request):
-    context = {'page': 'View Contact'}
+
+    queryset = ContactsInfo.objects.all()  
+    print(queryset)
+    context= {'contactsInfo': queryset, 'page': 'View Contact'}
     return render(request, "viewContact.html", context)
+
+def deleteContact(request, id):
+    queryset = ContactsInfo.objects.get(id=id)
+    queryset.delete()
+    return redirect('/')

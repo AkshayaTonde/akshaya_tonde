@@ -5,20 +5,27 @@
     </div>
 
     <div class="container">
+        
+    <form method="post" enctype="multipart/form-data">
+        <button type="submit" class="btn btn-primary"><a href="createContact/>">Create a New 0.
+            Contact </a></button>
+    </form>
 
+    </div>
+    <div class="container">
     <table class="table table-striped">
         <tr>
             <th>Contact Name</th>
             <th>Email</th>
             <th>Created Time</th>
         </tr>
-    {% for contact in contact_list%}
+    {% for contact in contactsInfo%}
         <tr>
             <td><a class="edit" title="" data-toggle="tooltip" data-original-title="Edit"><i class="bi bi-pen"></i></a>
-                <a class="delete" title="" data-toggle="tooltip" data-original-title="Delete"><i class="bi bi-trash"></i></a>
-                {{contact.Contact_name}}</td>
+                <a href="/deleteContact/{{contact.id}}/" class="delete" title="" data-toggle="tooltip" data-original-title="Delete"><i class="bi bi-trash"></i></a>
+                {{contact.name}}</td>
             <td>{{contact.email}}</td>
-            <td>{{contact.CreatedTime}}</td>
+            <td>{{contact.creation_date}}</td>
         </tr>
     {% endfor %}
     </table>
