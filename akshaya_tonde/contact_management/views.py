@@ -72,7 +72,7 @@ def deleteContact(request, id):
     return render(request, "deleteContact.html", context)
 
 def editContact(request, id):
-    // need to write logic for updating contact
+    #need to write logic for updating contact
 
     queryset = ContactsInfo.objects.get(id=id)
     context= {'contactsInfo': queryset, 'page' : 'Edit Contact'}
