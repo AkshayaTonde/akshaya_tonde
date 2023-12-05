@@ -21,9 +21,9 @@ from contact_management.views import *
 
 urlpatterns = [
     path('', home, name= 'Home'),
-    path('/', home, name= 'Home'),
-    path('viewContact/', viewContact, name= 'viewContact'),
+    path('viewContact/<id>/', viewContact, name= 'viewContact'),
     path('createContact/', createContact, name= 'createContact'),
     path('deleteContact/<id>/', deleteContact, name= 'deleteContact'),
+    path('editContact/<id>/', editContact, name= 'editContact'),
     path('admin/', admin.site.urls),
 ]

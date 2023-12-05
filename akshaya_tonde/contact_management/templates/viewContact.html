@@ -1,10 +1,25 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+{% extends "base.html"%}
 {% block start %}
     <div>
-        <h1>View Contact Management</h1>
+        <h1></h1>
     </div>
-    <div>
-        {{contactsInfo}}
-
+    <div class="container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>View Contact Details </h2>
+        <div class="mb-1">
+            <label for="exampleFormControlTextarea1" class="form-label" >Name : {{contactsInfo.name}} </label>
+        </div>
+        <div class="mb-1">
+            <label for="exampleFormControlInput1" class="form-label" >Email : {{contactsInfo.email}} </label>
+        </div>
+        <div class="mb-1">
+            <label for="exampleFormControlTextarea1" class="form-label" >Notes : {{contactsInfo.notes}}</label>
+        </div>
+        <button type="submit" name="home" class="btn btn-success"> Home </button>
+        <button type="submit" name="edit" class="btn btn-primary"> Edit </button>
+        <button type="submit" name="cancel"class="btn btn-danger"> Cancel </button>
+    </form>
     </div>
 {% endblock %}
