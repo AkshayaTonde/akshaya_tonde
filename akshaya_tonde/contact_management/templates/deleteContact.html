@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends "base.html"%}
+{% block start %}
+    <div>
+        <h1></h1>
+    </div>
+    <div class="container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Delete Contact</h2>
+        <div class="mb-1">
+            <label for="exampleFormControlTextarea1" class="form-label" >Name </label>
+            <textarea name="name" class="form-control" id="name" rows="3" required>{{contactsInfo.name}}</textarea>
+        </div>
+        <div class="mb-1">
+            <label for="exampleFormControlInput1" class="form-label" >Email </label>
+            <input name="emailadd"  type="email" class="form-control" id="email" value={{contactsInfo.email}} required> 
+        </div>
+        <div class="mb-1">
+            <label for="exampleFormControlTextarea1" class="form-label" >Notes</label>
+            <textarea name="notes" class="form-control" id="notes" rows="6" required>{{contactsInfo.notes}}</textarea>
+        </div>
+        <button type="submit" name="delete" class="btn btn-primary"> Delete </button>
+        <button type="submit" name="cancel"class="btn btn-danger"> Cancel </button>
+    </form>
+    </div>
+{% endblock %}

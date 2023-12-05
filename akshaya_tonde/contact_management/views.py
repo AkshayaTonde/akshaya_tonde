@@ -33,25 +33,38 @@ def viewContact (request, id):
     if request.method == "POST":
 
         data = request.POST
-        print(data)
+
 
         if 'home' in request.POST:
             return redirect('/')
         
         if 'edit' in request.POST:
-            return redirect('/')
+            id = data.get("id")
+            return redirect(f'editContact/{id}')
         
-        if 'cancel' in request.POST:
-            return redirect('/')
+        if 'delete' in request.POST:
+            return redirect(f'deleteContact/{id}')
 
     return render(request, "viewContact.html", context)
 
 def deleteContact(request, id):
+
     queryset = ContactsInfo.objects.get(id=id)
-    queryset.delete()
-    return redirect('/')
+    print(queryset)
+    context= {'contactsInfo': queryset, 'page': 'Delete Contact'}
+
+    if request.method == "POST":
+        if 'delete' in request.POST:
+            queryset = ContactsInfo.objects.get(id=id)
+            queryset.delete()
+            return redirect('/')
+        if 'cancel' in request.POST:
+            return redirect('/')
+        
+    return render(request, "deleteContact.html", context)
 
 def editContact(request, id):
+
     queryset = ContactsInfo.objects.get(id=id)
     context= {'contactsInfo': queryset, 'page' : 'Edit Contact'}
     return render(request, "editContact.html", context)
