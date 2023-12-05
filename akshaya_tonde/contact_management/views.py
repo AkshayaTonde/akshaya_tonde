@@ -10,19 +10,30 @@ def home(request):
 
 
 def createContact(request):
-
+    context={'page':'Create Contact', "nameError": "","emailError":"" , "data":""}
     if request.method == "POST":
         data = request.POST
-        print(data)
-        ContactsInfo.objects.create(
-            name = data.get("name"),
-            email = data.get("emailadd"),
-            notes = data.get("notes"),
-            creation_date = django.utils.timezone.now()
-        )
-        return redirect('/')
-    
-    context={'page':'Create Contact'}
+        if 'submit' in data:
+            print(data)
+            if ContactsInfo.objects.get(name=data.get("name")):
+                context={"nameError": "Contact with this name already exists"}
+                context={"Data": data}
+                return render(request, "createContact.html", context) 
+            
+            if ContactsInfo.objects.get(name=data.get("email")):
+                context={"emailError": "Contact with this email already exists"}
+                return render(request, "createContact.html", context)
+            else:
+                ContactsInfo.objects.create(
+                    name = data.get("name"),
+                    email = data.get("emailadd"),
+                    notes = data.get("notes"),
+                    creation_date = django.utils.timezone.now()
+                )
+                return redirect('/')
+        if 'cancel' in data:
+            return redirect('/')
+        
     return render(request, "createContact.html", context)
 
 def viewContact (request, id):
@@ -31,10 +42,7 @@ def viewContact (request, id):
     context= {'contactsInfo': queryset, 'page': 'View Contact'}
 
     if request.method == "POST":
-
         data = request.POST
-
-
         if 'home' in request.POST:
             return redirect('/')
         
@@ -64,6 +72,7 @@ def deleteContact(request, id):
     return render(request, "deleteContact.html", context)
 
 def editContact(request, id):
+    // need to write logic for updating contact
 
     queryset = ContactsInfo.objects.get(id=id)
     context= {'contactsInfo': queryset, 'page' : 'Edit Contact'}
