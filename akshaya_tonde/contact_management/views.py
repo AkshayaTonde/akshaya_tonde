@@ -11,26 +11,31 @@ def home(request):
 
 def createContact(request):
     context={'page':'Create Contact', "nameError": "","emailError":"" , "data":""}
+
     if request.method == "POST":
         data = request.POST
         if 'submit' in data:
             print(data)
-            if ContactsInfo.objects.get(name=data.get("name")):
+            # need to fix the data issue
+            if ContactsInfo.objects.get(data.get("name")) :
                 context={"nameError": "Contact with this name already exists"}
                 context={"Data": data}
+                print("Operation terminated name error ")
                 return render(request, "createContact.html", context) 
             
-            if ContactsInfo.objects.get(name=data.get("email")):
+            if ContactsInfo.objects.get(data.get("email")):
                 context={"emailError": "Contact with this email already exists"}
+                print("Operation terminated email error ")
                 return render(request, "createContact.html", context)
-            else:
-                ContactsInfo.objects.create(
-                    name = data.get("name"),
-                    email = data.get("emailadd"),
-                    notes = data.get("notes"),
-                    creation_date = django.utils.timezone.now()
-                )
-                return redirect('/')
+          
+            ContactsInfo.objects.create(
+                name = data.get("name"),
+                email = data.get("emailadd"),
+                notes = data.get("notes"),
+                creation_date = django.utils.timezone.now()
+            )
+            return redirect('/')
+        
         if 'cancel' in data:
             return redirect('/')
         
@@ -72,8 +77,19 @@ def deleteContact(request, id):
     return render(request, "deleteContact.html", context)
 
 def editContact(request, id):
-    #need to write logic for updating contact
-
     queryset = ContactsInfo.objects.get(id=id)
+    if request.method == "POST":
+        data = request.POST
+        if 'edit' in request.POST:
+            queryset = ContactsInfo.objects.get(id=id)
+            queryset.name= data.get("name")
+            queryset.email =  data.get("emailadd")
+            queryset.notes = data.get("notes")
+            queryset.creation_date = django.utils.timezone.now()
+            queryset.save()
+            return redirect('/')
+        if 'cancel' in request.POST:
+            return redirect('/')
+        
     context= {'contactsInfo': queryset, 'page' : 'Edit Contact'}
     return render(request, "editContact.html", context)
