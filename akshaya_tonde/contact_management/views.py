@@ -24,9 +24,10 @@ def createContact(request):
                 messages.error(request, f"Contact with {form_name} already exists")
                 return render(request,"createContact.html" )
             
-            if ContactsInfo.objects.filter(name__iexact=form_email).exists():
+            if ContactsInfo.objects.filter(email__iexact=form_email).exists():
                 messages.error(request, f"Contact with {form_email} already exists")
                 return render(request,"createContact.html" )
+            
             else:
 
                 ContactsInfo.objects.create(
