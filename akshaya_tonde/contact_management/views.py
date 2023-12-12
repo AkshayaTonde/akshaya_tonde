@@ -54,11 +54,11 @@ def viewContact (request, id):
             return redirect('/')
         
         if 'edit' in request.POST:
-            id = data.get("id")
-            return redirect(f'editContact/{id}')
-        
+            return redirect(f'/editContact/{id}')
+
         if 'delete' in request.POST:
-            return redirect(f'deleteContact/{id}')
+            return redirect(f'/deleteContact/{id}')
+        
 
     return render(request, "viewContact.html", context)
 
