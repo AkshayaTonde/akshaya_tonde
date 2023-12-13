@@ -1,32 +1,34 @@
 {% extends "base.html"%}
 {% block start %}
-    <div class="col">
-    <div class="container-fluid p-4">
-        
-    <!--<form method="post" enctype="multipart/form-data"> -->
+    
+    <!--<div class="container col-md-9 p-4"> -->
+    <div class="mt-5">
+    <div class="container p-12">
         {% csrf_token %}
         <a href="/createContact/"> 
             <button type="submit" class="btn btn-primary">Create a Contact</button>
         </a>
-     <!--</form> -->
-
+    </div>
     </div>
 
-    <div class="container p-4">
-    <div class="col-xl-6 col-md-6">
+    <div class="container mt-5">
+   
+    <div class="col-xl-9 col-md-9">
     <table class="table table-striped">
         <tr>
+            <th>Action</th>
+            <th></th>
+            <th></th>
             <th>Contact Name</th>
             <th>Email</th>
             <th>Created Time</th>
         </tr>
     {% for contact in contactsInfo%}
         <tr>
-            <td>
-                <a href="/viewContact/{{contact.id}}/" class="delete" title="" data-toggle="tooltip" data-original-title="Delete"><i class="bi bi-binoculars"></i></a>
-                <a href="/editContact/{{contact.id}}/" class="edit" title="" data-toggle="tooltip" data-original-title="Edit"><i class="bi bi-pen"></i></a>
-                <a href="/deleteContact/{{contact.id}}/" class="delete" title="" data-toggle="tooltip" data-original-title="Delete"><i class="bi bi-trash"></i></a>
-                {{contact.name}}</td>
+            <td><a href="/viewContact/{{contact.id}}/" class="delete" title="View Contact"><i class="bi bi-binoculars"></i></a> </td>
+            <td><a href="/editContact/{{contact.id}}/" class="edit" title="Edit Contact"><i class="bi bi-pen"></i></a> </td>
+            <td><a href="/deleteContact/{{contact.id}}/" class="delete" title="Delete Contact"><i class="bi bi-trash"></i></a> </td>
+            <td>{{contact.name}}</td>
             <td>{{contact.email}}</td>
             <td>{{contact.creation_date}}</td>
         </tr>
