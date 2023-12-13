@@ -8,18 +8,20 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
-        <div class="mb-1">
+        <div class="form-group mb-1">
             <label for="exampleFormControlTextarea1" class="form-label" >Name : {{contactsInfo.name}} </label>
         </div>
-        <div class="mb-1">
+        <div class="form-group mb-1">
             <label for="exampleFormControlInput1" class="form-label" >Email : {{contactsInfo.email}} </label>
         </div>
-        <div class="mb-1">
+        <div class="form-group mb-1">
             <label for="exampleFormControlTextarea1" class="form-label" >Notes : {{contactsInfo.notes}}</label>
         </div>
-        <button type="submit" name="home" class="btn btn-success"> Home </button>
-        <button type="submit" name="edit" name="edit"class="btn btn-primary"> Edit </button> 
-        <button type="submit" name="delete" name="delete" class="btn btn-danger"> Delete </button>
+        <div class="mt-2">
+            <button type="submit" name="home" class="btn btn-success"> Home </button>
+            <button type="submit" name="edit" name="edit"class="btn btn-primary"> Edit </button> 
+            <button type="submit" name="delete" name="delete" class="btn btn-danger"> Delete </button>
+        </div>
     </form>
     </div>
 {% endblock %}
